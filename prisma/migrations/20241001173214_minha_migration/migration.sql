@@ -1,21 +1,11 @@
 -- CreateTable
-CREATE TABLE "SimpleUser" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "age" INTEGER,
-
-    CONSTRAINT "SimpleUser_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "UserWithPassword" (
+CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
 
-    CONSTRAINT "UserWithPassword_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -40,13 +30,10 @@ CREATE TABLE "Installments" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "SimpleUser_email_key" ON "SimpleUser"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "UserWithPassword_email_key" ON "UserWithPassword"("email");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
-ALTER TABLE "Card" ADD CONSTRAINT "Card_userId_fkey" FOREIGN KEY ("userId") REFERENCES "UserWithPassword"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Card" ADD CONSTRAINT "Card_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Installments" ADD CONSTRAINT "Installments_cardId_fkey" FOREIGN KEY ("cardId") REFERENCES "Card"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
